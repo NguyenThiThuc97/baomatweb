@@ -49,6 +49,11 @@ public class ThemLichKhaiGiang extends HttpServlet {
 		
 		Connection connec = null;
 		try {
+			String st=malop+ctdt+thoigian+lichkhaigiang+phonghoc+thoigianhoc;
+			boolean kt = XSS.XSSkt(st);
+			if(kt==true && TranBoDem.TBD50(malop)==true && TranBoDem.TBD50(ctdt)==true && TranBoDem.TBD50(thoigian)==true
+					 && TranBoDem.TBD50(lichkhaigiang)==true && TranBoDem.TBD50(phonghoc)==true && TranBoDem.TBD50(thoigianhoc)==true)
+			{
 			String url = "jdbc:sqlserver://localhost:1433;instance=(local);DatabaseName=TTTH;";
 			String username = "HQTCSDL";
 			String password = "hieu123";
@@ -63,6 +68,11 @@ public class ThemLichKhaiGiang extends HttpServlet {
 			ppst.setString(6,thoigianhoc);
 			ppst.executeUpdate();
 			response.sendRedirect("DSLichKhaiGiang");
+			}
+			else
+			{
+				response.sendRedirect("ThemLichKhaiGiang");
+			}
 		}
 		catch (SQLException e) {
 			throw new ServletException(e);

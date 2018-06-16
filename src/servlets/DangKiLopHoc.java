@@ -47,9 +47,12 @@ public class DangKiLopHoc extends HttpServlet {
 		String userPassword = request.getParameter("userPassword");
 		String lophoc = request.getParameter("lophoc");
 		String message = "";
-		
+		String st=userName+ userPassword+lophoc;
+		boolean kt= XSS.XSSkttk(st);
 		Connection connec = null;
 		try {
+			if(kt==true && TranBoDem.TBD50(userName)==true && TranBoDem.TBD50(userPassword)==true && TranBoDem.TBD50(lophoc)==true)
+			{
 				String url = "jdbc:sqlserver://localhost:1433;instance=(local);DatabaseName=TTTH;";
 				String usernamesql = "HQTCSDL";
 				String passwordsql = "hieu123";
@@ -86,6 +89,12 @@ public class DangKiLopHoc extends HttpServlet {
 			}
 				request.setAttribute("message2", message);
 				request.getRequestDispatcher("LichKhaiGiang").forward(request, response);
+		}
+			else
+			{
+				request.setAttribute("message2", message);
+				request.getRequestDispatcher("LichKhaiGiang").forward(request, response);
+			}
 		}
 		catch (SQLException e) {
 			throw new ServletException(e);

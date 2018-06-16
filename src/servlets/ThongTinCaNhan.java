@@ -80,6 +80,11 @@ public class ThongTinCaNhan extends HttpServlet {
 		HttpSession session = request.getSession();
 		String username = session.getAttribute("user").toString();
 		Connection connec = null;
+		String st=hoten + sdt + diachi + nghenghiep;
+		boolean kt= XSS.XSSkt(st);
+		if(kt==true  && TranBoDem.TBD50(hoten)==true  && TranBoDem.TBD50(sdt)==true  && TranBoDem.TBD100(diachi)==true 
+				 && TranBoDem.TBD50(nghenghiep)==true && TranBoDem.TBD50(username)==true)
+		{
 		try {
 			String url = "jdbc:sqlserver://localhost:1433;instance=(local);DatabaseName=TTTH;";
 			String usernamesql = "HQTCSDL";
@@ -105,6 +110,12 @@ public class ThongTinCaNhan extends HttpServlet {
 			} catch (SQLException e) {
 				throw new ServletException(e);
 			}
+		}
+		}
+		else
+		{
+			session.setAttribute("thongbao","Thay đổi thông tin tài khoản không thành công!!!");
+			response.sendRedirect("ThongTinCaNhan");
 		}
 		
 	}

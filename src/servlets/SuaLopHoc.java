@@ -94,7 +94,13 @@ public class SuaLopHoc extends HttpServlet {
 		
 		Connection connec = null;
 		try {
-			String url = "jdbc:sqlserver://localhost:1433;instance=MAYTINH-E0OC46K;DatabaseName=TTTH;";
+			String st=malop+ctdt+thoigian+ngaykhaigiang+phonghoc+thoigianhoc;
+			boolean kt = XSS.XSSkt(st);
+			if(kt==true && TranBoDem.TBD50(malop)==true && TranBoDem.TBD50(ctdt)==true && TranBoDem.TBD50(thoigian)==true 
+					&& TranBoDem.TBD50(ngaykhaigiang)==true && TranBoDem.TBD50(phonghoc)==true && TranBoDem.TBD50(thoigianhoc)==true)
+			{
+				String url = "jdbc:sqlserver://localhost:1433;instance=MAYTINH-E0OC46K;DatabaseName=TTTH;";
+			
 			String username = "HQTCSDL";
 			String password = "hieu123";
 			String query = "UPDATE dbo.LichKhaiGiang SET TenKhoaHoc =?, ThoiGian=?, LichKhaiGiang=?, PhongHoc=?, ThoiGianHoc=? WHERE MaLop=?";
@@ -108,6 +114,11 @@ public class SuaLopHoc extends HttpServlet {
 			ppst.setString(6,malop);
 			ppst.executeUpdate();
 			response.sendRedirect("DSLichKhaiGiang");
+		}
+		else
+		{
+			response.sendRedirect("SuaLopHoc?id="+malop);
+		}
 		}
 		catch (SQLException e) {
 			throw new ServletException(e);

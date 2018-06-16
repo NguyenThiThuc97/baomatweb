@@ -54,7 +54,10 @@ public class CacKhoaHocCuaToi extends HttpServlet {
 			Connection connec = null ;
 			connec = DriverManager.getConnection(url, usernamesql, password);
 			Statement state = connec.createStatement();
-			String query = "EXECUTE dbo.CacKhoaHocCuaToi @TenDangNhap = ?";
+			String query = "SELECT t3.MaLop,TenKhoaHoc,ThoiGian,PhongHoc,HocPhi,LichKhaiGiang,ThoiGianHoc "
+					+ "FROM (SELECT MaLop,TenKhoaHoc,ThoiGian,PhongHoc,HocPhi,LichKhaiGiang,ThoiGianHoc "
+					+ "FROM  dbo.ChuongTrinhDaoTao t1 JOIN LichKhaiGiang t2 ON t1.MaCTDT = t2.TenKhoaHoc) t3 JOIN LopHocVien t4 ON t3.MaLop=t4.MaLop "
+					+ "WHERE TaiKhoan=?;";
 			
 			//sửa
 			PreparedStatement ps = connec.prepareStatement(query);

@@ -48,6 +48,10 @@ public class ThemCCDT extends HttpServlet {
 		
 		Connection connec = null;
 		try {
+			String st=maccdt + tenccdt + hocphi;
+			boolean kt =XSS.XSSkt(st);
+			if(kt==true && TranBoDem.TBD50(maccdt)==true && TranBoDem.TBD50(tenccdt)==true && TranBoDem.TBD10(hocphi)==true)
+			{
 			String url = "jdbc:sqlserver://localhost:1433;instance=(local);DatabaseName=TTTH;";
 			String username = "HQTCSDL";
 			String password = "hieu123";
@@ -59,6 +63,11 @@ public class ThemCCDT extends HttpServlet {
 			ppst.setString(3,hocphi);
 			ppst.executeUpdate();
 			response.sendRedirect("CCDT");
+			}
+			else
+			{
+				response.sendRedirect("ThemCCDT");
+			}
 		}
 		catch (SQLException e) {
 			throw new ServletException(e);

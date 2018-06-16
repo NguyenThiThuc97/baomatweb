@@ -56,7 +56,11 @@ public class DangKi extends HttpServlet {
 			String query = "INSERT INTO dbo.TaiKhoan ( TenDangNhap , MatKhau , HoTen , SDT , DiaChi , NgheNghiep, QuyenHan ) VALUES(?, ?, ?, ?, ?, ?, ?)";
 			connec = DriverManager.getConnection(url, username, passwordsql);
 			PreparedStatement ppst = connec.prepareStatement(query);
-			if(password.equals(password2))
+			String st= sdt +name + email + password + diachi + nghenghiep;
+			boolean kt = XSS.XSSkt(st);
+			
+			if(password.equals(password2) && kt==true && TranBoDem.TBD50(sdt)==true && TranBoDem.TBD50(name)==true && TranBoDem.TBD50(email)==true
+					&& TranBoDem.TBD50(password)==true && TranBoDem.TBD50(diachi)==true && TranBoDem.TBD50(nghenghiep)==true)
 			{
 				ppst.setString(1,email);
 				ppst.setString(2,password);
@@ -66,12 +70,12 @@ public class DangKi extends HttpServlet {
 				ppst.setString(6,nghenghiep);
 				ppst.setString(7, "User");
 				ppst.executeUpdate();
-				message = "Tạo tài khoản thành công";
+				message = "Tao tai khoan thanh cong!!!";
 				page="Home.jsp";
 			}
 			else
 			{
-				message ="mật khẩu bạn nhập lại không đúng";
+				message ="Tao tai khoan that bai!!!!";
 				page="WEB-INF/DangKi.jsp";
 			}
 			request.setAttribute("ThongBao", message);	

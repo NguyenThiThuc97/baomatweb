@@ -48,7 +48,10 @@ public class XemHocVienTheoCTDT extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<DangNhapEntry> DSCTDT = new ArrayList<DangNhapEntry>();
 		String malop = request.getParameter("malop");
+		boolean kt=XSS.XSSkttk(malop);
 		try {
+			if(kt==true  && TranBoDem.TBD50(malop)==true)
+			{
 			Connection connec = null ;
 			connec = DriverManager.getConnection(url, username, password);
 			Statement state = connec.createStatement();
@@ -63,6 +66,7 @@ public class XemHocVienTheoCTDT extends HttpServlet {
 			{
 				DangNhapEntry entry = new DangNhapEntry(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
 				DSCTDT.add(entry);
+			}
 			}
 			
 		} 

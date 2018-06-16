@@ -51,7 +51,7 @@ public class DSLichKhaiGiang extends HttpServlet {
 			ResultSet rs = state.executeQuery(query);
 			while(rs.next())
 			{
-				LichKhaiGiangEntry entry = new LichKhaiGiangEntry(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
+				LichKhaiGiangEntry entry = new LichKhaiGiangEntry(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
 				DSLKG.add(entry);
 			}
 			

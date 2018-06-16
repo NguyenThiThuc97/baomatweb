@@ -84,9 +84,12 @@ public class ThayDoiQuyenHan extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String tendangnhap = request.getParameter("tendangnhap");
 		String quyenhan = request.getParameter("quyenhan");
-		
+		String st=tendangnhap+quyenhan;
+		boolean kt = XSS.XSSkttk(st);
 		Connection connec = null;
 		try {
+			if(kt==true && TranBoDem.TBD50(tendangnhap)==true && TranBoDem.TBD50(quyenhan)==true)
+			{
 			String url = "jdbc:sqlserver://localhost:1433;instance=MAYTINH-E0OC46K;DatabaseName=TTTH;";
 			String username = "HQTCSDL";
 			String password = "hieu123";
@@ -97,6 +100,11 @@ public class ThayDoiQuyenHan extends HttpServlet {
 			ppst.setString(2,tendangnhap);
 			ppst.executeUpdate();
 			response.sendRedirect("DSQuyenHan");
+			}
+			else
+			{
+				response.sendRedirect("DSQuyenHan");
+			}
 		}
 		catch (SQLException e) {
 			throw new ServletException(e);

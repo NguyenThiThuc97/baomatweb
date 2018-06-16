@@ -93,8 +93,8 @@ function myFunction(tendangnhap){
         <li><a href="LichKhaiGiang">Lịch khai giảng</a></li>
         <li><a href="TinTuc.jsp">Tin tức</a></li>
         <li><a href="Lienhe.jsp">Liên hệ</a></li>
-        <c:if test="${user!=null && quyenhan == 'Admin'}"><li class="active"><a href="Admin.jsp">Quản lý tài khoản</a></li></c:if>
-        <c:if test="${user!=null && quyenhan != 'Admin'}"><li><a href="User.jsp">Quản lý tài khoản</a></li></c:if>
+       <c:if test="${user!=null}"><li><a href="KTQuyen">Quản lý tài khoản</a></li></c:if>
+<%--         <c:if test="${user!=null && quyenhan != 'Admin'}"><li><a href="KTQuyen">Quản lý tài khoản</a></li></c:if> --%>
       </ul>
       <c:if test="${user==null}">
       <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">

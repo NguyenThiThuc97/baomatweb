@@ -99,8 +99,8 @@ function myFunction(mactdt)
         <li><a href="LichKhaiGiang">Lịch khai giảng</a></li>
         <li><a href="TinTuc.jsp">Tin tức</a></li>
         <li><a href="Lienhe.jsp">Liên hệ</a></li>
-        <c:if test="${user!=null && quyenhan == 'Admin'}"><li class="active"><a href="Admin.jsp">Quản lý tài khoản</a></li></c:if>
-        <c:if test="${user!=null && quyenhan != 'Admin'}"><li><a href="User.jsp">Quản lý tài khoản</a></li></c:if>
+       <c:if test="${user!=null}"><li><a href="KTQuyen">Quản lý tài khoản</a></li></c:if>
+<%--         <c:if test="${user!=null && quyenhan != 'Admin'}"><li><a href="KTQuyen">Quản lý tài khoản</a></li></c:if> --%>
       </ul>
       <c:if test="${user==null}">
       <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
@@ -231,11 +231,11 @@ function myFunction(mactdt)
                    <th>Ngày khai giảng</th>
                    <th>Phòng học</th>
                    <th>Thòi gian học</th>
-                   <th>Số lượng</th>
+<!--                    <th>Số lượng</th> -->
                    <th>Sửa</th>
                    <th>Xóa</th>
                    </thead>
-                   <c:forEach items="${ DSLKG}" var="a">
+                   <c:forEach items="${DSLKG}" var="a">
                  <tr>
                     <td>${a.malop}</td>
                     <td>${a.ctdt}</td>
@@ -243,7 +243,7 @@ function myFunction(mactdt)
 					<td> ${a.ngaykhaigiang}</td>
 					<td> ${a.phonghoc}</td>
 					<td> ${a.thoigianhoc}</td>
-					<td>${a.soluong}</td>
+<%-- 					<td>${a.soluong}</td> --%>
                     <td><a href="SuaLopHoc?id=${a.malop }"><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></a></td>
                     <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button onclick ="myFunction('${a.malop}')" class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
                 </tr>

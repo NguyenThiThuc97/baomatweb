@@ -67,8 +67,10 @@ public class DoiMatKhau extends HttpServlet {
 			{
 				if(rs.getString(1).equals(username) && rs.getString(2).equals(pass) )
 				{
-					
-					if(pass2.equals(repass2))
+					String st =pass+pass2+repass2;
+					boolean kt=XSS.XSSkt(st);
+					if(pass2.equals(repass2) && kt==true && TranBoDem.TBD50(username)==true && TranBoDem.TBD50(pass)==true
+							 && TranBoDem.TBD50(pass2)==true && TranBoDem.TBD50(repass2)==true)
 					{
 						try 
 						{
